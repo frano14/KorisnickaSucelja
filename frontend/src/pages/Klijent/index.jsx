@@ -4,18 +4,15 @@ import KlijentSidebar from "../../components/KlijentSidebar";
 import ZatraziTermin from "./ZatraziTermin";
 
 const Klijent = () => {
-  const ime = "Ivana";
+  const ime = "Frano";
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
-      {/* Sidebar */}
       <KlijentSidebar />
 
-      {/* Main Content */}
       <div className="flex-1 p-6">
         <div className="max-w-6xl mx-auto space-y-8">
-          {/* Greeting Section */}
           <div className="bg-white shadow-lg rounded-xl p-8 flex items-center space-x-6">
             <FaUserCircle className="text-primary text-5xl" />
             <div>
@@ -29,7 +26,6 @@ const Klijent = () => {
             </div>
           </div>
 
-          {/* Stats Section */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-white shadow-md rounded-lg p-6 flex flex-col items-center hover:scale-105 transition-transform">
               <FaCalendarAlt className="text-primary text-4xl mb-3" />
@@ -50,7 +46,6 @@ const Klijent = () => {
             </div>
           </div>
 
-          {/* To-do Section */}
           <div className="bg-white shadow-lg rounded-xl p-8">
             <h2 className="text-2xl font-semibold mb-4 text-primary">
               Vaše nadolazeće obaveze
@@ -62,7 +57,6 @@ const Klijent = () => {
             </ul>
           </div>
 
-          {/* Button to open modal */}
           <div className="flex justify-center">
             <button
               className="btn btn-primary btn-wide text-white text-lg"
@@ -74,7 +68,6 @@ const Klijent = () => {
         </div>
       </div>
 
-      {/* Modal */}
       <ZatraziTermin
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

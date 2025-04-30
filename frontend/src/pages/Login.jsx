@@ -1,27 +1,33 @@
-import React from 'react'
+import React from "react";
 
 const Login = () => {
   return (
-    <div className='flex items-center justify-center h-screen'>
-        <div className='bg-white text-base-100 p-8 w-[40%]'>
-            <h1 className='text-[44px] text-center font-semibold mb-8'>Tranquil</h1>
+    <div className="flex items-center justify-center min-h-screen bg-gray-50">
+      <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md space-y-6">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold text-primary mb-2">Solara</h1>
+          <p className="text-[#04494B]">Prijavite se u svoj račun</p>
+        </div>
 
-            <fieldset class="fieldset ">
-              <legend class="fieldset-legend text-base-100 text-[14px]">Unos lozinke</legend>
-              <input type="text" className="input w-full placeholder:text-[#ffffff99] placeholder:text-[12px] outline-none text-white" placeholder="Zaporka" />
-              <div className='flex items-center justify-between'>
-                <p class="label">Unesite lozinku koju ste dobili na vaš e-mail.</p>
-                <p class="label text-base-100 underline font-semibold">Niste dobili lozinku?</p>
-              </div>
-            </fieldset>
+        <fieldset className="form-control space-y-3">
+          <label className="label">
+            <span className="label-text text-[#04494B] font-semibold">
+              Unos šifre
+            </span>
+          </label>
+          <input
+            type="password"
+            placeholder="Šifra"
+            className="input input-bordered w-full placeholder:text-[#04494B99] text-[#04494B] focus:border-primary bg-white"
+          />
+        </fieldset>
 
-            <button className='btn btn-primary w-full text-white font-semibold text-[14px] mt-6'>
-                prijavi se
-            </button>
-
-        </div>   
+        <button className="btn btn-primary w-full text-white font-semibold text-sm">
+          Prijavi se
+        </button>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

@@ -2,58 +2,77 @@ import React from "react";
 
 const SignUp = () => {
   return (
-    <div className="flex items-center justify-center h-screen">
-      <div className="bg-white text-base-100 p-8 w-[40%]">
-        <h1 className="text-[44px] text-center font-semibold mb-2">Tranquil</h1>
-        <p class="text-base-100 text-center mb-8">
-          Kreirajte vaš korisnički račun.
-        </p>
+    <div className="flex items-center justify-center min-h-screen bg-gray-50">
+      <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md space-y-6">
+        {/* Naslov */}
+        <div className="text-center">
+          <h1 className="text-4xl font-bold text-primary mb-2">Solara</h1>
+          <p className="text-[#04494B]">Kreirajte vaš korisnički račun.</p>
+        </div>
 
-        <fieldset class="fieldset mb-4">
-          <legend class="fieldset-legend text-base-100 text-[14px]">Ime</legend>
-          <input
-            type="text"
-            className="input w-full placeholder:text-[#ffffff99] placeholder:text-[12px] outline-none text-white"
-            placeholder="Marko"
-          />
-        </fieldset>
+        {/* Forma */}
+        <form className="space-y-4">
+          {/* Ime */}
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text text-[#04494B] font-semibold">
+                Ime
+              </span>
+            </label>
+            <input
+              type="text"
+              placeholder="Marko"
+              className="input input-bordered w-full bg-white text-[#04494B] placeholder:text-[#04494B99]"
+            />
+          </div>
 
-        <fieldset class="fieldset mb-4">
-          <legend class="fieldset-legend text-base-100 text-[14px]">
-            Prezime
-          </legend>
-          <input
-            type="text"
-            className="input w-full placeholder:text-[#ffffff99] placeholder:text-[12px] outline-none text-white"
-            placeholder="Markić"
-          />
-        </fieldset>
+          {/* Prezime */}
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text text-[#04494B] font-semibold">
+                Prezime
+              </span>
+            </label>
+            <input
+              type="text"
+              placeholder="Markić"
+              className="input input-bordered w-full bg-white text-[#04494B] placeholder:text-[#04494B99]"
+            />
+          </div>
 
-        <fieldset class="fieldset mb-4">
-          <legend class="fieldset-legend text-base-100 text-[14px]">
-            Mail
-          </legend>
-          <input
-            type="mail"
-            className="input w-full placeholder:text-[#ffffff99] placeholder:text-[12px] outline-none text-white"
-            placeholder="markomarkic@gmail.com"
-          />
-        </fieldset>
+          {/* Mail */}
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text text-[#04494B] font-semibold">
+                Email
+              </span>
+            </label>
+            <input
+              type="email"
+              placeholder="markomarkic@gmail.com"
+              className="input input-bordered w-full bg-white text-[#04494B] placeholder:text-[#04494B99]"
+            />
+          </div>
 
-        <fieldset class="fieldset mb-4">
-          <legend class="fieldset-legend text-base-100 text-[14px]">
-            Broj telefona
-          </legend>
-          <input
-            type=" number"
-            className="input w-full placeholder:text-[#ffffff99] placeholder:text-[12px] outline-none text-white"
-            placeholder="+123 45 678 910"
-          />
-        </fieldset>
+          {/* Broj telefona */}
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text text-[#04494B] font-semibold">
+                Broj telefona
+              </span>
+            </label>
+            <input
+              type="tel"
+              placeholder="+123 45 678 910"
+              className="input input-bordered w-full bg-white text-[#04494B] placeholder:text-[#04494B99]"
+            />
+          </div>
 
-        <button className="btn btn-primary w-full text-white font-semibold text-[14px] mt-4">
-          registriraj se
-        </button>
+          {/* Gumb */}
+          <button className="btn btn-primary w-full text-white font-semibold text-sm mt-2">
+            Registriraj se
+          </button>
+        </form>
       </div>
     </div>
   );
