@@ -4,6 +4,9 @@ import Klijent from "./pages/Klijent";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Psiholog from "./pages/Psiholog";
+import Profil from "./pages/Psiholog/profil";
+import ProfilKlijent from "./pages/Klijent/profil";
+import KreirajKlijenta from "./pages/Psiholog/KreirajKlijenta";
 
 function App() {
   return (
@@ -13,6 +16,9 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/klijent" element={<Klijent />} />
         <Route path="/psiholog" element={<Psiholog />} />
+        <Route path="/psiholog/profil" element={<Profil />} />
+        <Route path="/klijent/profil" element={<ProfilKlijent />} />
+        <Route path="/psiholog/novi-klijent" element={<KreirajKlijenta />} />
       </Routes>
     </Router>
   );
