@@ -1,6 +1,27 @@
 import React from "react";
+import { useState } from "react";
+import { useAuthStore } from "../store/authStore";
+import { useNavigate } from "react-router-dom";
+
 
 const SignUp = () => {
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const { signup } = useAuthStore();
+  const navigate = useNavigate();
+
+  const handleSignUp = async (event) => {
+    event.preventDefault();
+    try {
+			await signup(email, name, phoneNumber);
+			navigate("/login");
+		} catch (error) {
+			console.log(error);
+		}
+  };
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50">
       <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md space-y-6">
@@ -11,7 +32,7 @@ const SignUp = () => {
         </div>
 
         {/* Forma */}
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={handleSignUp}>
           {/* Ime */}
           <div className="form-control">
             <label className="label">
@@ -23,20 +44,9 @@ const SignUp = () => {
               type="text"
               placeholder="Marko"
               className="input input-bordered w-full bg-white text-[#04494B] placeholder:text-[#04494B99]"
-            />
-          </div>
-
-          {/* Prezime */}
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text text-[#04494B] font-semibold">
-                Prezime
-              </span>
-            </label>
-            <input
-              type="text"
-              placeholder="Markić"
-              className="input input-bordered w-full bg-white text-[#04494B] placeholder:text-[#04494B99]"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
             />
           </div>
 
@@ -51,6 +61,9 @@ const SignUp = () => {
               type="email"
               placeholder="markomarkic@gmail.com"
               className="input input-bordered w-full bg-white text-[#04494B] placeholder:text-[#04494B99]"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
             />
           </div>
 
@@ -65,6 +78,9 @@ const SignUp = () => {
               type="tel"
               placeholder="+123 45 678 910"
               className="input input-bordered w-full bg-white text-[#04494B] placeholder:text-[#04494B99]"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              required
             />
           </div>
 

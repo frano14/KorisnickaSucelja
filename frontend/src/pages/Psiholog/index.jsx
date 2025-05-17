@@ -2,12 +2,16 @@ import React from "react";
 import { FaUserFriends, FaCalendarAlt } from "react-icons/fa";
 import KalendarTermina from "../../components/KalendarTermina";
 import PsihologSidebar from "../../components/PsihologSidebar";
+import { useAuthStore } from "../../store/authStore";
 
 const Psiholog = () => {
+
+  const { user } = useAuthStore();
+
   const klijenti = [
     { ime: "Ivana Horvat", email: "ivana@gmail.com", status: "Online" },
     { ime: "Marko Maric", email: "marko@gmail.com", status: "Away" },
-    { ime: "Ana Kovač", email: "ana@gmail.com", status: "Offline" },
+    { ime: "Frano Gugić", email: "frano.gugic8@gmail.com", status: "Offline" },
   ];
 
   return (
@@ -18,7 +22,7 @@ const Psiholog = () => {
         <div className="max-w-6xl mx-auto space-y-8">
           <div className="bg-white shadow-lg rounded-xl p-8">
             <h1 className="text-3xl font-bold text-primary mb-2">
-              Dobrodošli, Marko!
+              Dobrodošli, {user.name}!
             </h1>
             <p className="text-[#04494B]">
               Upravljajte terminima i klijentima iz jednog mjesta.

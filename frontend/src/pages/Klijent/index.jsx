@@ -2,22 +2,22 @@ import React, { useState } from "react";
 import { FaCalendarAlt, FaUserCircle, FaComments } from "react-icons/fa";
 import KlijentSidebar from "../../components/KlijentSidebar";
 import ZatraziTermin from "./ZatraziTermin";
+import { useAuthStore } from "../../store/authStore";
 
 const Klijent = () => {
-  const ime = "Frano";
+  const { user } = useAuthStore()
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
       <KlijentSidebar />
-
       <div className="flex-1 p-6">
         <div className="max-w-6xl mx-auto space-y-8">
           <div className="bg-white shadow-lg rounded-xl p-8 flex items-center space-x-6">
             <FaUserCircle className="text-primary text-5xl" />
             <div>
               <h1 className="text-3xl font-bold text-primary">
-                Pozdrav, {ime}!
+                Pozdrav, {user?.name}!
               </h1>
               <p className="text-[#04494B]">
                 Dobrodošli na svoj dashboard. Ovdje možete upravljati obavezama
