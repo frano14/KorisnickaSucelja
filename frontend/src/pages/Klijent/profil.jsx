@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FaUserCircle,
   FaEdit,
@@ -7,17 +7,23 @@ import {
   FaSave,
 } from "react-icons/fa";
 import KlijentSidebar from "../../components/KlijentSidebar";
+import { useAuthStore } from "../../store/authStore";
 
 const ProfilKlijent = () => {
-  const [klijent, setKlijent] = useState({
-    ime: "Frano Marić",
-    email: "frano.maric@gmail.com",
-    telefon: "+385 91 765 4321",
-    godine: 28,
-    status: "Aktivan korisnik",
-  });
-
+  const { user } = useAuthStore();
+  const [klijent, setKlijent] = useState(null);
   const [editMode, setEditMode] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      setKlijent({
+        ime: user.name,
+        email: user.email,
+        telefon: user.phoneNumber,
+        status: user.status || "Aktivan korisnik",
+      });
+    }
+  }, [user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,7 +33,16 @@ const ProfilKlijent = () => {
   const handleSave = () => {
     console.log("Spremi promjene:", klijent);
     setEditMode(false);
+    // TODO: Pošalji PATCH/PUT request prema backendu za ažuriranje profila
   };
+
+  if (!klijent) {
+    return (
+      <div className="min-h-screen bg-gray-100 flex justify-center items-center">
+        <p className="text-xl text-primary">Učitavanje podataka...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
@@ -64,7 +79,7 @@ const ProfilKlijent = () => {
                       name="ime"
                       value={klijent.ime}
                       onChange={handleChange}
-                      className="input input-bordered w-full bg-white text-[#04494B] placeholder:text-[#04494B99]"
+                      className="input input-bordered w-full bg-white text-[#04494B]"
                     />
                   </div>
                   <div>
@@ -75,7 +90,7 @@ const ProfilKlijent = () => {
                       name="email"
                       value={klijent.email}
                       onChange={handleChange}
-                      className="input input-bordered w-full bg-white text-[#04494B] placeholder:text-[#04494B99]"
+                      className="input input-bordered w-full bg-white text-[#04494B]"
                     />
                   </div>
                   <div>
@@ -86,19 +101,7 @@ const ProfilKlijent = () => {
                       name="telefon"
                       value={klijent.telefon}
                       onChange={handleChange}
-                      className="input input-bordered w-full bg-white text-[#04494B] placeholder:text-[#04494B99]"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-[#04494B]">
-                      Godine
-                    </label>
-                    <input
-                      name="godine"
-                      type="number"
-                      value={klijent.godine}
-                      onChange={handleChange}
-                      className="input input-bordered w-full bg-white text-[#04494B] placeholder:text-[#04494B99]"
+                      className="input input-bordered w-full bg-white text-[#04494B]"
                     />
                   </div>
                 </div>
@@ -112,9 +115,6 @@ const ProfilKlijent = () => {
                   </li>
                   <li>
                     <strong>Telefon:</strong> {klijent.telefon}
-                  </li>
-                  <li>
-                    <strong>Godine:</strong> {klijent.godine}
                   </li>
                 </ul>
               )}

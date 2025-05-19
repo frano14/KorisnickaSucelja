@@ -3,9 +3,7 @@ import { useState } from "react";
 import { useAuthStore } from "../store/authStore";
 import { useNavigate } from "react-router-dom";
 
-
 const SignUp = () => {
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -15,11 +13,11 @@ const SignUp = () => {
   const handleSignUp = async (event) => {
     event.preventDefault();
     try {
-			await signup(email, name, phoneNumber);
-			navigate("/login");
-		} catch (error) {
-			console.log(error);
-		}
+      await signup(email, name, phoneNumber, true);
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

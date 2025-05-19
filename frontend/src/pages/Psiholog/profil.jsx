@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FaUserCircle,
   FaEdit,
@@ -8,16 +8,22 @@ import {
   FaUserEdit,
 } from "react-icons/fa";
 import PsihologSidebar from "../../components/PsihologSidebar";
+import { useAuthStore } from "../../store/authStore";
 
 const Profil = () => {
-  const [psiholog, setPsiholog] = useState({
-    ime: "dr. Marija Petrović",
-    titula: "Kognitivno-bihevioralni psiholog",
-    email: "marija.p@gmail.com",
-    telefon: "+385 91 123 4567",
-  });
-
+  const { user } = useAuthStore();
+  const [psiholog, setPsiholog] = useState(null);
   const [editMode, setEditMode] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      setPsiholog({
+        ime: user.name || "",
+        email: user.email || "",
+        telefon: user.phoneNumber || "",
+      });
+    }
+  }, [user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,6 +34,8 @@ const Profil = () => {
     console.log("Spremam podatke psihologa:", psiholog);
     setEditMode(false);
   };
+
+  if (!psiholog) return null;
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
@@ -41,7 +49,6 @@ const Profil = () => {
               <h1 className="text-3xl font-bold text-primary">
                 {psiholog.ime}
               </h1>
-              <p className="text-[#04494B]">{psiholog.titula}</p>
               <p className="text-gray-600">
                 {psiholog.email} | {psiholog.telefon}
               </p>
@@ -51,11 +58,15 @@ const Profil = () => {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             <div className="bg-white rounded-lg shadow p-4 text-center">
               <p className="text-sm text-gray-500">Ukupno sesija</p>
-              <h3 className="text-2xl font-bold text-primary">125</h3>
+              <h3 className="text-2xl font-bold text-primary">
+                {user.sessions?.length ?? 0}
+              </h3>
             </div>
             <div className="bg-white rounded-lg shadow p-4 text-center">
               <p className="text-sm text-gray-500">Broj klijenata</p>
-              <h3 className="text-2xl font-bold text-primary">38</h3>
+              <h3 className="text-2xl font-bold text-primary">
+                {user.clients?.length ?? 0}
+              </h3>
             </div>
             <div className="bg-white rounded-lg shadow p-4 text-center">
               <p className="text-sm text-gray-500">Prosječna ocjena</p>
@@ -77,12 +88,7 @@ const Profil = () => {
                     onChange={handleChange}
                     className="input input-bordered w-full bg-white text-[#04494B] placeholder:text-[#04494B99]"
                   />
-                  <input
-                    name="titula"
-                    value={psiholog.titula}
-                    onChange={handleChange}
-                    className="input input-bordered w-full bg-white text-[#04494B] placeholder:text-[#04494B99]"
-                  />
+
                   <input
                     name="email"
                     value={psiholog.email}
@@ -99,7 +105,6 @@ const Profil = () => {
               ) : (
                 <p className="text-sm text-gray-600">
                   <strong>Ime:</strong> {psiholog.ime} <br />
-                  <strong>Titula:</strong> {psiholog.titula} <br />
                   <strong>Email:</strong> {psiholog.email} <br />
                   <strong>Telefon:</strong> {psiholog.telefon}
                 </p>

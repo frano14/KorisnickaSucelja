@@ -3,10 +3,14 @@ import { FaCalendarAlt, FaUserCircle, FaComments } from "react-icons/fa";
 import KlijentSidebar from "../../components/KlijentSidebar";
 import ZatraziTermin from "./ZatraziTermin";
 import { useAuthStore } from "../../store/authStore";
+import { useNavigate } from "react-router-dom";
 
 const Klijent = () => {
-  const { user } = useAuthStore()
+  const { user } = useAuthStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
+
+  console.log(user);
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
@@ -39,7 +43,10 @@ const Klijent = () => {
               <p className="text-[#04494B]">u razgovoru</p>
             </div>
 
-            <div className="bg-white shadow-md rounded-lg p-6 flex flex-col items-center hover:scale-105 transition-transform">
+            <div
+              className="bg-white shadow-md rounded-lg p-6 flex flex-col items-center hover:scale-105 transition-transform hover:cursor-pointer"
+              onClick={() => navigate("/klijent/profil")}
+            >
               <FaUserCircle className="text-primary text-4xl mb-3" />
               <h2 className="text-xl font-semibold text-primary">Profil</h2>
               <p className="text-[#04494B]">pogledaj detalje</p>
