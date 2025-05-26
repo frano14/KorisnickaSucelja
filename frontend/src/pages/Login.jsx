@@ -12,7 +12,7 @@ const Login = () => {
     event.preventDefault();
     try {
 			await login( password );
-			navigate("/klijent");
+			navigate("/psiholog");
 		} catch (error) {
 			console.log(error);
 		}

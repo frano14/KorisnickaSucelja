@@ -19,12 +19,6 @@ const LandingPage = () => {
         >
           Prijava
         </Link>
-        <Link
-          to="/signup"
-          className="btn border border-primary text-primary px-6 py-3 rounded-lg text-lg shadow-md hover:bg-primary hover:text-white"
-        >
-          Registracija
-        </Link>
       </div>
 
       <div className="mt-16 text-center text-[#04494B99] text-sm">

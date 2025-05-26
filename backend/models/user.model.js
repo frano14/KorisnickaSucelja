@@ -36,7 +36,8 @@ const userSchema = new mongoose.Schema(
             type: Number,
         },
         sessions: {
-            type: [String],
+            type: [Date],
+			default: []
         },
         messages: {
             type: [String],

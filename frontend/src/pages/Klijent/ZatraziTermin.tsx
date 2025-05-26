@@ -1,14 +1,14 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { format } from "date-fns";
 
 const ZatraziTermin = ({ isOpen, onClose }) => {
   const today = new Date(2025, 3, 29); // 29.04.2025. (Mjesec je 0-indeksiran!)
 
-  // Hardkodirani zauzeti termini
   const zauzetiTermini = [
-    new Date(2025, 4, 2), // 2.5.2025.
-    new Date(2025, 4, 10), // 10.5.2025.
-    new Date(2025, 4, 18), // 18.5.2025.
+    new Date(2025, 4, 2),
+    new Date(2025, 4, 10),
+    new Date(2025, 4, 18),
   ];
 
   const [selectedDate, setSelectedDate] = useState("");
@@ -23,6 +23,20 @@ const ZatraziTermin = ({ isOpen, onClose }) => {
 
   const handleDateChange = (e) => {
     setSelectedDate(e.target.value);
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const dateToSend = new Date(selectedDate).getTime(); // timestamp
+      await axios.post("http://localhost:3000/api/users/session", {
+        date: dateToSend,
+      });
+      alert("Termin je uspješno zatražen!");
+      onClose();
+    } catch (error) {
+      console.error("Greška pri slanju termina:", error);
+      alert("Greška prilikom slanja termina.");
+    }
   };
 
   return (
@@ -53,6 +67,7 @@ const ZatraziTermin = ({ isOpen, onClose }) => {
             Odustani
           </button>
           <button
+            onClick={handleSubmit}
             disabled={!selectedDate || isZauzet(new Date(selectedDate))}
             className="btn btn-primary text-white disabled:opacity-50"
           >

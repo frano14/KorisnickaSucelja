@@ -33,7 +33,7 @@ const Klijent = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-white shadow-md rounded-lg p-6 flex flex-col items-center hover:scale-105 transition-transform">
               <FaCalendarAlt className="text-primary text-4xl mb-3" />
-              <h2 className="text-xl font-semibold text-primary">3 termina</h2>
+              <h2 className="text-xl font-semibold text-primary">{user.sessions.length} termina</h2>
               <p className="text-[#04494B]">zakazana</p>
             </div>
 

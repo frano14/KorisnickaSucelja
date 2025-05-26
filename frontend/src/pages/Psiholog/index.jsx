@@ -1,18 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaUserFriends, FaCalendarAlt } from "react-icons/fa";
 import KalendarTermina from "../../components/KalendarTermina";
 import PsihologSidebar from "../../components/PsihologSidebar";
+import Termini from "../../components/Termini";
 import { useAuthStore } from "../../store/authStore";
 
 const Psiholog = () => {
 
-  const { user } = useAuthStore();
+  const [users, setUsers] = useState([]);
+  const { user, clients, fetchUsers } = useAuthStore();
 
-  const klijenti = [
-    { ime: "Ivana Horvat", email: "ivana@gmail.com", status: "Online" },
-    { ime: "Marko Maric", email: "marko@gmail.com", status: "Away" },
-    { ime: "Frano Gugić", email: "frano.gugic8@gmail.com", status: "Offline" },
-  ];
+  useEffect(() => {
+    fetchUsers();
+    console.log(user)
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
@@ -34,7 +35,7 @@ const Psiholog = () => {
               <FaCalendarAlt className="text-primary text-4xl" />
               <div>
                 <h2 className="text-xl font-semibold text-primary">
-                  3 termina
+                  {user.sessions.length} termina
                 </h2>
                 <p className="text-[#04494B]">zakazana</p>
               </div>
@@ -44,7 +45,7 @@ const Psiholog = () => {
               <FaUserFriends className="text-primary text-4xl" />
               <div>
                 <h2 className="text-xl font-semibold text-primary">
-                  3 klijenta
+                  {clients?.length} klijenta
                 </h2>
                 <p className="text-[#04494B]">trenutno u sustavu</p>
               </div>
@@ -63,14 +64,14 @@ const Psiholog = () => {
                 Popis klijenata
               </h2>
               <ul className="divide-y">
-                {klijenti.map((klijent, idx) => (
+                {clients?.map((klijent, idx) => (
                   <li
                     key={idx}
                     className="py-3 flex justify-between items-center"
                   >
                     <div>
                       <p className="font-medium text-[#04494B]">
-                        {klijent.ime}
+                        {klijent.name}
                       </p>
                       <p className="text-sm text-gray-500">{klijent.email}</p>
                     </div>
@@ -91,6 +92,7 @@ const Psiholog = () => {
             </div>
           </div>
         </div>
+        <Termini/>
       </div>
     </div>
   );

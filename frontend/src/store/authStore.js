@@ -10,6 +10,7 @@ export const useAuthStore = create((set) => ({
   isLoading: false,
   isCheckingAuth: true,
   message: null,
+  clients: null,
 
   signup: async (email, name, phoneNumber, isPshy) => {
     set({ isLoading: true, error: null });
@@ -23,16 +24,11 @@ export const useAuthStore = create((set) => ({
           isPshy,
         }
       );
-      if (isPshy) {
         set({
           user: response.data.user,
-          isAuthenticated: false, // možeš staviti i true ako automatski želiš login
+          isAuthenticated: false, 
           isLoading: false,
         });
-      } else {
-        // inače, samo reset loading i NE diraj trenutno prijavljenog korisnika
-        set({ isLoading: false });
-      }
     } catch (error) {
       set({
         error: error.response?.data?.message || "Error signing up",
@@ -96,4 +92,14 @@ export const useAuthStore = create((set) => ({
       set({ error: null, isCheckingAuth: false, isAuthenticated: false });
     }
   },
+   fetchUsers: async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/api/users/allUsers');
+        console.log(response.data)
+        set({ clients: response.data });
+
+      } catch (error) {
+        console.error('Greška prilikom dohvaćanja korisnika:', error);
+      }
+    },
 }));

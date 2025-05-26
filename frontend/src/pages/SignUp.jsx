@@ -4,9 +4,9 @@ import { useAuthStore } from "../store/authStore";
 import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [name, setName] = useState("test");
+  const [email, setEmail] = useState("test@gmail.com");
+  const [phoneNumber, setPhoneNumber] = useState("123");
   const { signup } = useAuthStore();
   const navigate = useNavigate();
 
@@ -14,7 +14,7 @@ const SignUp = () => {
     event.preventDefault();
     try {
       await signup(email, name, phoneNumber, true);
-      navigate("/login");
+      navigate("/psiholog");
     } catch (error) {
       console.log(error);
     }

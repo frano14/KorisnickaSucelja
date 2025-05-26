@@ -11,7 +11,7 @@ import PsihologSidebar from "../../components/PsihologSidebar";
 import { useAuthStore } from "../../store/authStore";
 
 const Profil = () => {
-  const { user } = useAuthStore();
+  const { user, clients } = useAuthStore();
   const [psiholog, setPsiholog] = useState(null);
   const [editMode, setEditMode] = useState(false);
 
@@ -50,7 +50,7 @@ const Profil = () => {
                 {psiholog.ime}
               </h1>
               <p className="text-gray-600">
-                {psiholog.email} | {psiholog.telefon}
+                {psiholog.email} | +{psiholog.telefon}
               </p>
             </div>
           </div>
@@ -65,7 +65,7 @@ const Profil = () => {
             <div className="bg-white rounded-lg shadow p-4 text-center">
               <p className="text-sm text-gray-500">Broj klijenata</p>
               <h3 className="text-2xl font-bold text-primary">
-                {user.clients?.length ?? 0}
+                {clients?.length ?? 0}
               </h3>
             </div>
             <div className="bg-white rounded-lg shadow p-4 text-center">
@@ -106,7 +106,7 @@ const Profil = () => {
                 <p className="text-sm text-gray-600">
                   <strong>Ime:</strong> {psiholog.ime} <br />
                   <strong>Email:</strong> {psiholog.email} <br />
-                  <strong>Telefon:</strong> {psiholog.telefon}
+                  <strong>Telefon: +</strong>{psiholog.telefon}
                 </p>
               )}
               <button
