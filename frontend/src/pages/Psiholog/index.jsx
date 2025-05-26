@@ -6,13 +6,12 @@ import Termini from "../../components/Termini";
 import { useAuthStore } from "../../store/authStore";
 
 const Psiholog = () => {
-
   const [users, setUsers] = useState([]);
   const { user, clients, fetchUsers } = useAuthStore();
 
   useEffect(() => {
     fetchUsers();
-    console.log(user)
+    console.log(user);
   }, []);
 
   return (
@@ -57,7 +56,7 @@ const Psiholog = () => {
               <h2 className="text-2xl font-semibold text-primary mb-4">
                 Kalendar termina
               </h2>
-              <KalendarTermina />
+              <KalendarTermina sessions={user.sessions} />
             </div>
             <div className="bg-white shadow-md rounded-lg p-6">
               <h2 className="text-2xl font-semibold text-primary mb-4">
@@ -92,7 +91,7 @@ const Psiholog = () => {
             </div>
           </div>
         </div>
-        <Termini/>
+        <Termini />
       </div>
     </div>
   );

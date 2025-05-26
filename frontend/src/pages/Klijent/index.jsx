@@ -30,17 +30,13 @@ const Klijent = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-white shadow-md rounded-lg p-6 flex flex-col items-center hover:scale-105 transition-transform">
               <FaCalendarAlt className="text-primary text-4xl mb-3" />
-              <h2 className="text-xl font-semibold text-primary">{user.sessions.length} termina</h2>
+              <h2 className="text-xl font-semibold text-primary">
+                {user.sessions.length} termina
+              </h2>
               <p className="text-[#04494B]">zakazana</p>
-            </div>
-
-            <div className="bg-white shadow-md rounded-lg p-6 flex flex-col items-center hover:scale-105 transition-transform">
-              <FaComments className="text-primary text-4xl mb-3" />
-              <h2 className="text-xl font-semibold text-primary">2 poruke</h2>
-              <p className="text-[#04494B]">u razgovoru</p>
             </div>
 
             <div
@@ -52,16 +48,28 @@ const Klijent = () => {
               <p className="text-[#04494B]">pogledaj detalje</p>
             </div>
           </div>
-
           <div className="bg-white shadow-lg rounded-xl p-8">
             <h2 className="text-2xl font-semibold mb-4 text-primary">
               Vaše nadolazeće obaveze
             </h2>
-            <ul className="list-disc list-inside text-[#04494B] space-y-2">
-              <li>Psihološko savjetovanje - 02.05.2025. u 14:00h</li>
-              <li>Kontrolni razgovor - 10.05.2025. u 10:30h</li>
-              <li>Radionica samopomoći - 18.05.2025. u 17:00h</li>
-            </ul>
+            {user.sessions.length > 0 ? (
+              <ul className="list-disc list-inside text-[#04494B] space-y-2">
+                {user.sessions
+                  .map((dateStr) => new Date(dateStr))
+                  .sort((a, b) => a - b)
+                  .map((date, index) => (
+                    <li key={index}>
+                      {date.toLocaleDateString("hr-HR", {
+                        day: "2-digit",
+                        month: "2-digit",
+                        year: "numeric",
+                      })}
+                    </li>
+                  ))}
+              </ul>
+            ) : (
+              <p className="text-[#04494B]">Nemate zakazanih termina.</p>
+            )}
           </div>
 
           <div className="flex justify-center">
